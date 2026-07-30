@@ -1,0 +1,121 @@
+name: Sürüm bildirimini yaz
+
+# Bir Release yayımlandığında surum.json dosyasini varliklardan otomatik uretir.
+# Elle sha256 / boyut girmek gerekmez; baslatici bu dosyayi okur.
+
+on:
+  release:
+    types: [published, edited]
+  workflow_dispatch:
+
+concurrency:
+  group: surum-yaz
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  yaz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: surum.json üret
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, re, urllib.request
+          from pathlib import Path
+
+          depo = os.environ["GITHUB_REPOSITORY"]
+          jeton = os.environ["GITHUB_TOKEN"]
+          KURULUM = "gps2026turkceyama.exe"
+          BASLATICI = "GPS2026Baslat.exe"
+
+          def api(yol):
+              istek = urllib.request.Request(
+                  f"https://api.github.com{yol}",
+                  headers={
+                      "Accept": "application/vnd.github+json",
+                      "Authorization": f"Bearer {jeton}",
+                      "User-Agent": "gps2026-surum-yaz",
+                  },
+              )
+              with urllib.request.urlopen(istek, timeout=30) as y:
+                  return json.load(y)
+
+          surumler = [r for r in api(f"/repos/{depo}/releases?per_page=20")
+                      if not r["draft"] and not r["prerelease"]]
+          if not surumler:
+              print("Yayımlanmış sürüm yok, dosya değiştirilmedi.")
+              raise SystemExit(0)
+
+          def sirala(r):
+              parca = re.findall(r"\d+", r["tag_name"])
+              return tuple(int(p) for p in parca) or (0,)
+
+          son = max(surumler, key=sirala)
+          varliklar = {a["name"]: a for a in son.get("assets", [])}
+          if KURULUM not in varliklar:
+              print(f"HATA: {son['tag_name']} icinde {KURULUM} yok.")
+              raise SystemExit(1)
+
+          def ozet(varlik):
+              istek = urllib.request.Request(
+                  varlik["url"],
+                  headers={
+                      "Accept": "application/octet-stream",
+                      "Authorization": f"Bearer {jeton}",
+                      "User-Agent": "gps2026-surum-yaz",
+                  },
+              )
+              h = hashlib.sha256()
+              with urllib.request.urlopen(istek, timeout=600) as y:
+                  while True:
+                      parca = y.read(1 << 20)
+                      if not parca:
+                          break
+                      h.update(parca)
+              return h.hexdigest()
+
+          kurulum = varliklar[KURULUM]
+          veri = {
+              "surum": son["tag_name"].lstrip("vV"),
+              "tarih": (son.get("published_at") or "")[:10],
+              "indirme": kurulum["browser_download_url"],
+              "sha256": ozet(kurulum),
+              "boyut": kurulum["size"],
+              "notlar": " ".join((son.get("body") or "").split())[:600],
+              "site": "https://43software.com.tr",
+          }
+          if BASLATICI in varliklar:
+              baslatici = varliklar[BASLATICI]
+              veri["baslatici"] = {
+                  "surum": veri["surum"],
+                  "indirme": baslatici["browser_download_url"],
+                  "sha256": ozet(baslatici),
+                  "boyut": baslatici["size"],
+              }
+
+          Path("surum.json").write_text(
+              json.dumps(veri, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(veri, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Değişikliği gönder
+        run: |
+          if [ -z "$(git status --porcelain surum.json)" ]; then
+            echo "surum.json zaten güncel."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add surum.json
+          git commit -m "Sürüm bildirimi güncellendi [skip ci]"
+          git push
