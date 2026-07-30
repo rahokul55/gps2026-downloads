@@ -1,0 +1,170 @@
+name: Sürüm yayımla
+
+# yayin/ klasorune yeni EXE dosyalari gonderildiginde:
+#   1. yayin/yayin.json icindeki surum icin Release acar
+#   2. EXE dosyalarini Release varligi olarak yukler
+#   3. sha256 ve boyutlari hesaplayip surum.json dosyasini yazar
+#   4. yayin/ klasorunu bosaltir (LFS deposu sismesin)
+
+on:
+  push:
+    branches: [main]
+    paths: ["yayin/**"]
+  workflow_dispatch:
+
+concurrency:
+  group: yayin
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  yayimla:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          lfs: true
+
+      - name: EXE dosyalarını denetle
+        id: denetim
+        run: |
+          if [ ! -f yayin/yayin.json ]; then
+            echo "yayin/yayin.json yok, atlanıyor."
+            echo "devam=hayir" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if ! ls yayin/*.exe >/dev/null 2>&1; then
+            echo "yayin/ içinde EXE yok, atlanıyor."
+            echo "devam=hayir" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "devam=evet" >> "$GITHUB_OUTPUT"
+
+      - name: Release oluştur, varlıkları yükle, surum.json yaz
+        if: steps.denetim.outputs.devam == 'evet'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, urllib.error, urllib.request
+          from pathlib import Path
+
+          depo = os.environ["GITHUB_REPOSITORY"]
+          jeton = os.environ["GITHUB_TOKEN"]
+          KURULUM = "gps2026turkceyama.exe"
+          BASLATICI = "GPS2026Baslat.exe"
+
+          bilgi = json.loads(Path("yayin/yayin.json").read_text(encoding="utf-8"))
+          surum = str(bilgi["surum"]).lstrip("vV")
+          etiket = f"v{surum}"
+          notlar = bilgi.get("notlar", "").strip() or f"GPS 2026 Türkçe Yama {etiket}"
+
+          def istek(url, veri=None, yontem=None, tur="application/json"):
+              r = urllib.request.Request(url, data=veri, method=yontem)
+              r.add_header("Accept", "application/vnd.github+json")
+              r.add_header("Authorization", f"Bearer {jeton}")
+              r.add_header("X-GitHub-Api-Version", "2022-11-28")
+              r.add_header("User-Agent", "gps2026-yayin")
+              if veri is not None:
+                  r.add_header("Content-Type", tur)
+                  r.add_header("Content-Length", str(len(veri)))
+              return r
+
+          def api(url, veri=None, yontem=None):
+              try:
+                  with urllib.request.urlopen(
+                      istek(url, veri, yontem), timeout=120
+                  ) as y:
+                      govde = y.read()
+                      return json.loads(govde) if govde else None
+              except urllib.error.HTTPError as e:
+                  if e.code == 404:
+                      return None
+                  raise SystemExit(f"GitHub API {e.code}: {e.read()[:400]!r}")
+
+          yayin = api(f"https://api.github.com/repos/{depo}/releases/tags/{etiket}")
+          if yayin is None:
+              yayin = api(
+                  f"https://api.github.com/repos/{depo}/releases",
+                  json.dumps({
+                      "tag_name": etiket,
+                      "name": f"GPS 2026 Türkçe Yama {etiket}",
+                      "body": notlar,
+                      "draft": False,
+                      "prerelease": False,
+                  }).encode(),
+              )
+              print(f"Release açıldı: {etiket}")
+          else:
+              print(f"Release zaten var: {etiket}")
+
+          mevcut = {a["name"]: a for a in yayin.get("assets", [])}
+          yuklendi = {}
+          for dosya in sorted(Path("yayin").glob("*.exe")):
+              ad = dosya.name
+              veri = dosya.read_bytes()
+              ozet = hashlib.sha256(veri).hexdigest()
+              if ad in mevcut:
+                  if mevcut[ad]["size"] != len(veri):
+                      raise SystemExit(
+                          f"{etiket} içinde farklı boyutta {ad} var. "
+                          "Yeni sürüm numarası kullanın."
+                      )
+                  print(f"{ad} zaten yüklü, atlandı.")
+                  yuklendi[ad] = (mevcut[ad], ozet)
+                  continue
+              url = yayin["upload_url"].split("{")[0] + f"?name={ad}"
+              with urllib.request.urlopen(
+                  istek(url, veri, tur="application/octet-stream"), timeout=900
+              ) as y:
+                  varlik = json.load(y)
+              print(f"{ad} yüklendi ({len(veri) / 1048576:.1f} MB)")
+              yuklendi[ad] = (varlik, ozet)
+
+          if KURULUM not in yuklendi:
+              raise SystemExit(f"{KURULUM} bulunamadı.")
+
+          kurulum, kurulum_ozet = yuklendi[KURULUM]
+          bildirim = {
+              "surum": surum,
+              "tarih": (yayin.get("published_at") or "")[:10]
+                       or __import__("datetime").date.today().isoformat(),
+              "indirme": kurulum["browser_download_url"],
+              "sha256": kurulum_ozet,
+              "boyut": kurulum["size"],
+              "notlar": " ".join(notlar.split())[:600],
+              "site": "https://43software.com.tr",
+          }
+          if BASLATICI in yuklendi:
+              baslatici, baslatici_ozet = yuklendi[BASLATICI]
+              bildirim["baslatici"] = {
+                  "surum": surum,
+                  "indirme": baslatici["browser_download_url"],
+                  "sha256": baslatici_ozet,
+                  "boyut": baslatici["size"],
+              }
+
+          Path("surum.json").write_text(
+              json.dumps(bildirim, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(bildirim, ensure_ascii=False, indent=2))
+          PY
+
+      - name: surum.json gönder ve yayin/ klasörünü boşalt
+        if: steps.denetim.outputs.devam == 'evet'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q --cached yayin/*.exe || true
+          rm -f yayin/*.exe
+          git add -A surum.json yayin
+          if git diff --cached --quiet; then
+            echo "Değişiklik yok."
+            exit 0
+          fi
+          git commit -m "Sürüm yayımlandı, bildirim güncellendi [skip ci]"
+          git push

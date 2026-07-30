@@ -1,5 +1,4 @@
 * text=auto eol=lf
-
 *.png binary
 *.jpg binary
 *.jpeg binary
@@ -8,5 +7,5 @@
 *.mp4 binary
 *.webm binary
 *.exe binary
-
 medya/medya.json linguist-generated=true
+yayin/*.exe filter=lfs diff=lfs merge=lfs -text
