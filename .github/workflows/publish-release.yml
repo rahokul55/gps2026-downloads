@@ -1,0 +1,44 @@
+name: Publish GPS2026 patch release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/publish-release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out download repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Verify patch file
+        shell: bash
+        run: |
+          test -f gps2026turkceyama.exe
+          test "$(stat -c%s gps2026turkceyama.exe)" -eq 120712096
+
+      - name: Publish release asset
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v1.0.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload v1.0.0 gps2026turkceyama.exe \
+              --clobber \
+              --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create v1.0.0 gps2026turkceyama.exe \
+              --latest \
+              --title "GPS 2026 Türkçe Yama v1.0.0" \
+              --notes "GPS 2026 Türkçe yamanın ilk genel sürümü." \
+              --repo "$GITHUB_REPOSITORY"
+          fi
