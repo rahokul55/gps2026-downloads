@@ -1,0 +1,72 @@
+name: Sürüm bildirimi denetimi
+
+on:
+  push:
+    branches: [main]
+    paths: ["surum.json"]
+  release:
+    types: [published, edited]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dogrula:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: surum.json alanlarını ve indirme bağlantısını denetle
+        run: |
+          python - <<'PY'
+          import json, sys, urllib.request
+
+          veri = json.load(open("surum.json", encoding="utf-8"))
+          hata = []
+
+          for alan in ("surum", "indirme", "sha256", "boyut"):
+              if not veri.get(alan):
+                  hata.append(f"'{alan}' alanı boş.")
+
+          surum = str(veri.get("surum", ""))
+          if not all(p.isdigit() for p in surum.split(".") if p != ""):
+              hata.append(f"Sürüm sayısal olmalı: {surum!r}")
+          if len(str(veri.get("sha256", ""))) != 64:
+              hata.append("sha256 64 karakter olmalı.")
+          if f"/v{surum}/" not in str(veri.get("indirme", "")):
+              hata.append("indirme bağlantısı sürüm etiketiyle uyuşmuyor.")
+
+          def basliklar(url):
+              istek = urllib.request.Request(url, method="GET")
+              istek.add_header("User-Agent", "gps2026-surum-denetim")
+              istek.add_header("Range", "bytes=0-0")
+              with urllib.request.urlopen(istek, timeout=30) as y:
+                  return y.status, y.headers, y.geturl()
+
+          for etiket, url, boyut in (
+              ("kurulum", veri.get("indirme"), veri.get("boyut")),
+              ("başlatıcı",
+               (veri.get("baslatici") or {}).get("indirme"),
+               (veri.get("baslatici") or {}).get("boyut")),
+          ):
+              if not url:
+                  continue
+              try:
+                  durum, bas, son = basliklar(url)
+              except Exception as e:
+                  hata.append(f"{etiket}: bağlantı açılamadı ({e})")
+                  continue
+              aralik = bas.get("Content-Range", "")
+              gercek = int(aralik.split("/")[-1]) if "/" in aralik else None
+              if gercek is not None and boyut and gercek != int(boyut):
+                  hata.append(
+                      f"{etiket}: boyut uyuşmuyor (bildirilen {boyut}, gerçek {gercek})"
+                  )
+              print(f"{etiket}: HTTP {durum}, boyut {gercek}")
+
+          if hata:
+              print("\n".join("HATA: " + h for h in hata))
+              sys.exit(1)
+          print("surum.json doğrulandı.")
+          PY

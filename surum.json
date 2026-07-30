@@ -1,0 +1,15 @@
+{
+  "surum": "2.7",
+  "tarih": "2026-07-31",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.7/gps2026turkceyama.exe",
+  "sha256": "7fe79a9fb9c432c004078b89a66d04981cca0f2576801056e29db9fc3103f05f",
+  "boyut": 120900120,
+  "notlar": "Kayıt alma hatası giderildi, şirket panellerindeki donma çözüldü, ülke liderleri ve şirket yöneticileri gerçek adlarıyla geldi, Türkçe dublaj yeniden seslendirildi ve kurulum dosyası dijital imza aldı.",
+  "site": "https://43software.com.tr",
+  "baslatici": {
+    "surum": "2.7",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.7/GPS2026Baslat.exe",
+    "sha256": "56619709d3020fa5d0c6a88d84b14ceac94c74b5d2e481431de278d230df2198",
+    "boyut": 12418160
+  }
+}

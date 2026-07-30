@@ -1,0 +1,8 @@
+{
+  "_aciklama": "Dosya adına göre galeri başlığı ve açıklaması. Anahtar, medya/gorsel veya medya/video içindeki dosya adıdır. 'sira' küçükse galeride öne çıkar (varsayılan 500).",
+  "ornek-ekran.png": {
+    "baslik": "Örnek başlık",
+    "aciklama": "Bu satırı silebilirsiniz; yalnızca biçimi göstermek için burada.",
+    "sira": 10
+  }
+}
