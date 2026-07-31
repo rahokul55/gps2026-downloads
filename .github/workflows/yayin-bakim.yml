@@ -1,0 +1,77 @@
+name: Yayın bakımı
+
+# "dublaj" ses paketi Release'i surum yayini degildir; en son surum ("latest")
+# olarak gorunurse sitedeki .../releases/latest/download/... baglantisi kirilir.
+# Bu is akisi onu on-yayin (prerelease) olarak isaretler ve en yuksek vX.Y
+# surumunu tekrar "latest" yapar.
+
+on:
+  release:
+    types: [published, edited, released]
+  push:
+    branches: [main]
+    paths: [".github/workflows/yayin-bakim.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bakim:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sürüm etiketlerini düzelt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json, os, re, urllib.error, urllib.request
+
+          depo = os.environ["GITHUB_REPOSITORY"]
+          jeton = os.environ["GITHUB_TOKEN"]
+          DUBLAJ_ETIKET = "dublaj"
+
+          def api(yol, veri=None, yontem=None):
+              r = urllib.request.Request(
+                  f"https://api.github.com{yol}",
+                  data=json.dumps(veri).encode() if veri is not None else None,
+                  method=yontem,
+              )
+              r.add_header("Accept", "application/vnd.github+json")
+              r.add_header("Authorization", f"Bearer {jeton}")
+              r.add_header("X-GitHub-Api-Version", "2022-11-28")
+              r.add_header("User-Agent", "gps2026-bakim")
+              if veri is not None:
+                  r.add_header("Content-Type", "application/json")
+              try:
+                  with urllib.request.urlopen(r, timeout=60) as y:
+                      govde = y.read()
+                      return json.loads(govde) if govde else None
+              except urllib.error.HTTPError as e:
+                  if e.code == 404:
+                      return None
+                  raise SystemExit(f"GitHub API {e.code}: {e.read()[:300]!r}")
+
+          surumler = api(f"/repos/{depo}/releases?per_page=50") or []
+
+          # 1) ses paketi yayini on-yayin olsun, asla "latest" gorunmesin
+          for r in surumler:
+              if r["tag_name"] == DUBLAJ_ETIKET and not r["prerelease"]:
+                  api(f"/repos/{depo}/releases/{r['id']}",
+                      {"prerelease": True, "make_latest": "false"}, "PATCH")
+                  print(f"{DUBLAJ_ETIKET} on-yayin olarak isaretlendi.")
+
+          # 2) en yuksek vX.Y surumu "latest" olsun
+          def sirala(r):
+              return tuple(int(p) for p in re.findall(r"\d+", r["tag_name"])) or (0,)
+
+          adaylar = [r for r in surumler
+                     if re.fullmatch(r"v\d+(\.\d+)*", r["tag_name"]) and not r["draft"]]
+          if adaylar:
+              son = max(adaylar, key=sirala)
+              api(f"/repos/{depo}/releases/{son['id']}",
+                  {"prerelease": False, "make_latest": "true"}, "PATCH")
+              print(f"{son['tag_name']} en son sürüm olarak işaretlendi.")
+          else:
+              print("vX.Y biçiminde sürüm bulunamadı.")
+          PY
