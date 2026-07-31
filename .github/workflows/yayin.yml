@@ -58,7 +58,7 @@ jobs:
           KURULUM = "gps2026turkceyama.exe"
           BASLATICI = "GPS2026Baslat.exe"
 
-          bilgi = json.loads(Path("yayin/yayin.json").read_text(encoding="utf-8"))
+          bilgi = json.loads(Path("yayin/yayin.json").read_text(encoding="utf-8-sig"))
           surum = str(bilgi["surum"]).lstrip("vV")
           etiket = f"v{surum}"
           notlar = bilgi.get("notlar", "").strip() or f"GPS 2026 Türkçe Yama {etiket}"
