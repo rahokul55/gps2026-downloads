@@ -1,10 +1,10 @@
 {
-  "surum": "3.1",
+  "surum": "3.2",
   "tarih": "2026-07-31",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.1/gps2026turkceyama.exe",
-  "sha256": "fed5b97cb272a5daf2f766bca93d905703482dcf62468a354e5ebeaf8337d7f7",
-  "boyut": 133405592,
-  "notlar": "Çökme avı: oyunun kendi çökme kayıtlarında hep aynı adreste yığın taşması görüldü. Sebep olabilecek veri hatası bulundu ve giderildi — haber başlığı alanında, özgün sürümde kısa bir referans kodu (#>NNNNNN) olan 32 hücreye uzun cümle yazılmıştı; bu hem referansı kırıyor hem de sabit boyutlu başlık alanını zorluyordu. Ayrıca özgün azami başlık uzunluğunu aşan tek metin kısaltıldı; artık hiçbir başlık oyunun kendi sınırını aşmıyor.",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.2/gps2026turkceyama.exe",
+  "sha256": "411e623c8024606a733bdb0c300149a205b22df38f29e01014001a316c9c1764",
+  "boyut": 133406008,
+  "notlar": "Oyunun ürettiği karakterlerin soyadlarında iki hata düzeltildi: soyad havuzundaki \"Day\" ve \"White\" gerçek soyad olduğu hâlde sözlük kelimesi sanılıp \"Gün\" ve \"beyaz\" diye çevrilmişti; artık özgün hâlinde. Havuzdaki Türkçe soyadların yazımına ve motorun gerektirdiği harf karşılıklarına dokunulmadı.",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "3.1",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.1/GPS2026Baslat.exe",
-    "sha256": "e364e59504206d1b2bfbfcbabac48f9c3e155773eae0ac524b8adb8ba6d55a63",
-    "boyut": 12421320
+    "surum": "3.2",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.2/GPS2026Baslat.exe",
+    "sha256": "347f07af027bb7b1893064620830235821e35975088c8151a997b4007d747b28",
+    "boyut": 12421000
   }
 }
