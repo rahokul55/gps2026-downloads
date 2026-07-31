@@ -1,4 +1,4 @@
 {
-  "surum": "2.8",
-  "notlar": "Türkçe dublaj tamamlandı: 4529 diyalog dosyası oyunun kendi seslendirme sanatçılarının tınısıyla Türkçe seslendirildi. Çeviride kalmış İngilizce ifadeler temizlendi (390 hücre): \"Anlaşma signed\", \"Bölge affected\", \"Yasa tasarısı introduced on\" gibi yarım çeviriler ve \"Bayan\" olarak yazılan milyon/milyar kısaltmaları düzeltildi. Ses paketi artık ayrı indiriliyor; dublaj istemeyen 115 MB'lık kurulum dosyasını indirip bitiriyor, isteyenlere kurulum sırasında ses paketi ekleniyor. Aynı ses paketi kuruluysa güncellemede yeniden indirilmiyor."
+  "surum": "2.9",
+  "notlar": "Kurulum artık oyun klasörüne GPS2026Baslat.exe koyuyor ve masaüstüne \"GPS 2026 Türkçe\" kısayolu ekliyor; oyunu bu kısayoldan açınca yeni sürüm kontrolü kendiliğinden çalışıyor. Türkçe dublajı sonradan eklemek isteyenler kurulumu tekrar çalıştırıp kutuyu işaretliyor; aynı ses paketi kuruluysa yeniden indirilmiyor. Ses paketi artık sürümden bağımsız tek bir yerde duruyor. Metin tarafında: takvimdeki ay kısaltmaları taşıyordu (HAZİRAN yerine HAZ), grafik eksenindeki ay baş harfleri yanlıştı, African Union \"Avustralya\" diye çevrilmişti, OIC/WB/EACU kısaltmaları düzeltildi, Evet/Hayır/Tamam düğmelerinin yanına sızmış 370 alakasız metin temizlendi ve 254 hücredeki fazla boşluk giderildi."
 }
