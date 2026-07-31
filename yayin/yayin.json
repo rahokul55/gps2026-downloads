@@ -1,4 +1,4 @@
 {
-  "surum": "3.1",
-  "notlar": "Çökme avı: oyunun kendi çökme kayıtlarında hep aynı adreste yığın taşması görüldü. Sebep olabilecek veri hatası bulundu ve giderildi — haber başlığı alanında, özgün sürümde kısa bir referans kodu (#>NNNNNN) olan 32 hücreye uzun cümle yazılmıştı; bu hem referansı kırıyor hem de sabit boyutlu başlık alanını zorluyordu. Ayrıca özgün azami başlık uzunluğunu aşan tek metin kısaltıldı; artık hiçbir başlık oyunun kendi sınırını aşmıyor."
+  "surum": "3.2",
+  "notlar": "Oyunun ürettiği karakterlerin soyadlarında iki hata düzeltildi: soyad havuzundaki \"Day\" ve \"White\" gerçek soyad olduğu hâlde sözlük kelimesi sanılıp \"Gün\" ve \"beyaz\" diye çevrilmişti; artık özgün hâlinde. Havuzdaki Türkçe soyadların yazımına ve motorun gerektirdiği harf karşılıklarına dokunulmadı."
 }
