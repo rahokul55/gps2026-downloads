@@ -173,13 +173,27 @@ jobs:
               "notlar": " ".join(notlar.split())[:600],
               "site": "https://43software.com.tr",
           }
+          # Ses paketi bu turda gonderilmemis olabilir; sabit Release'te
+          # duran dosya manifestten dusmesin diye oradan okunur.
           if DUBLAJ in yuklendi:
               ses, ses_ozet = yuklendi[DUBLAJ]
+          else:
+              ses, ses_ozet = None, ""
+              mevcut_ses = api(
+                  f"https://api.github.com/repos/{depo}/releases/tags/{DUBLAJ_ETIKET}")
+              for varlik in (mevcut_ses or {}).get("assets", []):
+                  if varlik["name"] == DUBLAJ:
+                      ses = varlik
+                      ses_ozet = (varlik.get("digest") or "").replace("sha256:", "")
+                      break
+          if ses and ses_ozet:
               bildirim["dublaj"] = {
                   "indirme": ses["browser_download_url"],
                   "sha256": ses_ozet,
                   "boyut": ses["size"],
               }
+          elif ses:
+              print("UYARI: ses paketi bulundu ama ozeti okunamadi, manifeste yazilmadi.")
           if BASLATICI in yuklendi:
               baslatici, baslatici_ozet = yuklendi[BASLATICI]
               bildirim["baslatici"] = {
