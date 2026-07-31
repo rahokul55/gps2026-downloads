@@ -1,20 +1,20 @@
 {
-  "surum": "2.9",
+  "surum": "3.0",
   "tarih": "2026-07-31",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.9/gps2026turkceyama.exe",
-  "sha256": "d70437e30ca3040fe127095006c7a269dc634ac0c0bb9147bafe84d4c2e367d7",
-  "boyut": 133404680,
-  "notlar": "Kurulum artık oyun klasörüne GPS2026Baslat.exe koyuyor ve masaüstüne \"GPS 2026 Türkçe\" kısayolu ekliyor; oyunu bu kısayoldan açınca yeni sürüm kontrolü kendiliğinden çalışıyor. Türkçe dublajı sonradan eklemek isteyenler kurulumu tekrar çalıştırıp kutuyu işaretliyor; aynı ses paketi kuruluysa yeniden indirilmiyor. Ses paketi artık sürümden bağımsız tek bir yerde duruyor. Metin tarafında: takvimdeki ay kısaltmaları taşıyordu (HAZİRAN yerine HAZ), grafik eksenindeki ay baş harfleri yanlıştı, African Union \"Avustralya\" diye çevrilmişti, OIC/WB/EACU kısaltmaları düzeltildi, Evet/Hayır/Tamam düğmele",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.0/gps2026turkceyama.exe",
+  "sha256": "009d8ba067f227998497604eb80d0f484fc9701ff9c8b84edca37eb8d8453b50",
+  "boyut": 133409904,
+  "notlar": "Steam desteği: başlatıcı artık oyunun hangi mağazadan kurulu olduğunu kendisi anlıyor. Epic sürümünde Epic üzerinden, Steam sürümünde Steam üzerinden, diğer kurulumlarda doğrudan açıyor; kimse yanlış mağazaya zorlanmıyor. Steam kütüphaneleri (farklı disk ve ağ konumları dahil) taranarak oyun klasörü otomatik bulunuyor. Başlatıcı kurulum dosyasının içinde geliyor, kurulumda oyun klasörüne kopyalanıyor ve masaüstüne \"GPS 2026 Türkçe\" kısayolu ekleniyor.",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
-    "sha256": "1c95aed4a27c0e74f362ffa127c6a85f103e5bd8c9b1c6aadf10c80b60b1c1c4",
+    "sha256": "98b975c9b8ba688fdd4e4747b21d71c7a7a0db15e90a18caee3982bd7c75581d",
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "2.9",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.9/GPS2026Baslat.exe",
-    "sha256": "a4af2b012f15eddcf7d1a07e3de132bb0ba011af8ee2576682dad0bd7e620d5d",
-    "boyut": 12418928
+    "surum": "3.0",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.0/GPS2026Baslat.exe",
+    "sha256": "5c69d76f4ac2dc85fbd451a161ba7d99a6caeb8e6141770785c2a4509774ddc1",
+    "boyut": 12422984
   }
 }
