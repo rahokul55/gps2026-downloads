@@ -36,7 +36,8 @@ jobs:
             echo "devam=hayir" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if ! ls yayin/*.exe yayin/*.dat >/dev/null 2>&1; then
+          if ! ls yayin/*.exe >/dev/null 2>&1 \
+             && ! ls yayin/*.dat >/dev/null 2>&1; then
             echo "yayin/ içinde yayımlanacak dosya yok, atlanıyor."
             echo "devam=hayir" >> "$GITHUB_OUTPUT"
             exit 0
