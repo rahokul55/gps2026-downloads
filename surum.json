@@ -1,10 +1,10 @@
 {
-  "surum": "3.0",
+  "surum": "3.1",
   "tarih": "2026-07-31",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.0/gps2026turkceyama.exe",
-  "sha256": "009d8ba067f227998497604eb80d0f484fc9701ff9c8b84edca37eb8d8453b50",
-  "boyut": 133409904,
-  "notlar": "Steam desteği: başlatıcı artık oyunun hangi mağazadan kurulu olduğunu kendisi anlıyor. Epic sürümünde Epic üzerinden, Steam sürümünde Steam üzerinden, diğer kurulumlarda doğrudan açıyor; kimse yanlış mağazaya zorlanmıyor. Steam kütüphaneleri (farklı disk ve ağ konumları dahil) taranarak oyun klasörü otomatik bulunuyor. Başlatıcı kurulum dosyasının içinde geliyor, kurulumda oyun klasörüne kopyalanıyor ve masaüstüne \"GPS 2026 Türkçe\" kısayolu ekleniyor.",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.1/gps2026turkceyama.exe",
+  "sha256": "fed5b97cb272a5daf2f766bca93d905703482dcf62468a354e5ebeaf8337d7f7",
+  "boyut": 133405592,
+  "notlar": "Çökme avı: oyunun kendi çökme kayıtlarında hep aynı adreste yığın taşması görüldü. Sebep olabilecek veri hatası bulundu ve giderildi — haber başlığı alanında, özgün sürümde kısa bir referans kodu (#>NNNNNN) olan 32 hücreye uzun cümle yazılmıştı; bu hem referansı kırıyor hem de sabit boyutlu başlık alanını zorluyordu. Ayrıca özgün azami başlık uzunluğunu aşan tek metin kısaltıldı; artık hiçbir başlık oyunun kendi sınırını aşmıyor.",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "3.0",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.0/GPS2026Baslat.exe",
-    "sha256": "5c69d76f4ac2dc85fbd451a161ba7d99a6caeb8e6141770785c2a4509774ddc1",
-    "boyut": 12422984
+    "surum": "3.1",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.1/GPS2026Baslat.exe",
+    "sha256": "e364e59504206d1b2bfbfcbabac48f9c3e155773eae0ac524b8adb8ba6d55a63",
+    "boyut": 12421320
   }
 }
