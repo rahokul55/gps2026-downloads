@@ -9,3 +9,4 @@
 *.exe binary
 medya/medya.json linguist-generated=true
 yayin/*.exe filter=lfs diff=lfs merge=lfs -text
+yayin/*.dat filter=lfs diff=lfs merge=lfs -text

@@ -36,8 +36,8 @@ jobs:
             echo "devam=hayir" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if ! ls yayin/*.exe >/dev/null 2>&1; then
-            echo "yayin/ içinde EXE yok, atlanıyor."
+          if ! ls yayin/*.exe yayin/*.dat >/dev/null 2>&1; then
+            echo "yayin/ içinde yayımlanacak dosya yok, atlanıyor."
             echo "devam=hayir" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -103,7 +103,8 @@ jobs:
 
           mevcut = {a["name"]: a for a in yayin.get("assets", [])}
           yuklendi = {}
-          for dosya in sorted(Path("yayin").glob("*.exe")):
+          varliklar = sorted(Path("yayin").glob("*.exe")) + sorted(Path("yayin").glob("*.dat"))
+          for dosya in varliklar:
               ad = dosya.name
               veri = dosya.read_bytes()
               ozet = hashlib.sha256(veri).hexdigest()
@@ -138,6 +139,14 @@ jobs:
               "notlar": " ".join(notlar.split())[:600],
               "site": "https://43software.com.tr",
           }
+          DUBLAJ = "gps2026dublaj.dat"
+          if DUBLAJ in yuklendi:
+              ses, ses_ozet = yuklendi[DUBLAJ]
+              bildirim["dublaj"] = {
+                  "indirme": ses["browser_download_url"],
+                  "sha256": ses_ozet,
+                  "boyut": ses["size"],
+              }
           if BASLATICI in yuklendi:
               baslatici, baslatici_ozet = yuklendi[BASLATICI]
               bildirim["baslatici"] = {
@@ -159,8 +168,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm -q --cached yayin/*.exe || true
-          rm -f yayin/*.exe
+          git rm -q --cached yayin/*.exe yayin/*.dat 2>/dev/null || true
+          rm -f yayin/*.exe yayin/*.dat
           git add -A surum.json yayin
           if git diff --cached --quiet; then
             echo "Değişiklik yok."
