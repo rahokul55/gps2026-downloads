@@ -101,25 +101,52 @@ jobs:
           else:
               print(f"Release zaten var: {etiket}")
 
-          mevcut = {a["name"]: a for a in yayin.get("assets", [])}
+          DUBLAJ = "gps2026dublaj.dat"
+          DUBLAJ_ETIKET = "dublaj"
+
+          def dublaj_yayini():
+              """Ses paketi surumden bagimsiz sabit bir Release'te durur."""
+              mevcut = api(
+                  f"https://api.github.com/repos/{depo}/releases/tags/{DUBLAJ_ETIKET}")
+              if mevcut is not None:
+                  return mevcut
+              return api(
+                  f"https://api.github.com/repos/{depo}/releases",
+                  json.dumps({
+                      "tag_name": DUBLAJ_ETIKET,
+                      "name": "Türkçe dublaj ses paketi",
+                      "body": ("Kurulum sihirbazi bu dosyayi yalnizca dublaj secilirse "
+                               "indirir. Yama surumu degistikce yeniden yuklenmez."),
+                      "draft": False,
+                      "prerelease": False,
+                  }).encode(),
+              )
+
           yuklendi = {}
           varliklar = sorted(Path("yayin").glob("*.exe")) + sorted(Path("yayin").glob("*.dat"))
           for dosya in varliklar:
               ad = dosya.name
+              hedef_yayin = dublaj_yayini() if ad == DUBLAJ else yayin
+              mevcut = {a["name"]: a for a in hedef_yayin.get("assets", [])}
               veri = dosya.read_bytes()
               ozet = hashlib.sha256(veri).hexdigest()
               if ad in mevcut:
-                  if mevcut[ad]["size"] != len(veri):
+                  if mevcut[ad]["size"] == len(veri):
+                      print(f"{ad} zaten yüklü, atlandı.")
+                      yuklendi[ad] = (mevcut[ad], ozet)
+                      continue
+                  if ad == DUBLAJ:
+                      api(f"https://api.github.com/repos/{depo}/releases/assets/"
+                          f"{mevcut[ad]['id']}", yontem="DELETE")
+                      print(f"{ad} eski sürümü silindi.")
+                  else:
                       raise SystemExit(
                           f"{etiket} içinde farklı boyutta {ad} var. "
                           "Yeni sürüm numarası kullanın."
                       )
-                  print(f"{ad} zaten yüklü, atlandı.")
-                  yuklendi[ad] = (mevcut[ad], ozet)
-                  continue
-              url = yayin["upload_url"].split("{")[0] + f"?name={ad}"
+              url = hedef_yayin["upload_url"].split("{")[0] + f"?name={ad}"
               with urllib.request.urlopen(
-                  istek(url, veri, tur="application/octet-stream"), timeout=900
+                  istek(url, veri, tur="application/octet-stream"), timeout=1800
               ) as y:
                   varlik = json.load(y)
               print(f"{ad} yüklendi ({len(veri) / 1048576:.1f} MB)")
@@ -139,7 +166,6 @@ jobs:
               "notlar": " ".join(notlar.split())[:600],
               "site": "https://43software.com.tr",
           }
-          DUBLAJ = "gps2026dublaj.dat"
           if DUBLAJ in yuklendi:
               ses, ses_ozet = yuklendi[DUBLAJ]
               bildirim["dublaj"] = {
