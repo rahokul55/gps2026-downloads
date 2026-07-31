@@ -1,4 +1,4 @@
 {
-  "surum": "3.0",
-  "notlar": "Steam desteği: başlatıcı artık oyunun hangi mağazadan kurulu olduğunu kendisi anlıyor. Epic sürümünde Epic üzerinden, Steam sürümünde Steam üzerinden, diğer kurulumlarda doğrudan açıyor; kimse yanlış mağazaya zorlanmıyor. Steam kütüphaneleri (farklı disk ve ağ konumları dahil) taranarak oyun klasörü otomatik bulunuyor. Başlatıcı kurulum dosyasının içinde geliyor, kurulumda oyun klasörüne kopyalanıyor ve masaüstüne \"GPS 2026 Türkçe\" kısayolu ekleniyor."
+  "surum": "3.1",
+  "notlar": "Çökme avı: oyunun kendi çökme kayıtlarında hep aynı adreste yığın taşması görüldü. Sebep olabilecek veri hatası bulundu ve giderildi — haber başlığı alanında, özgün sürümde kısa bir referans kodu (#>NNNNNN) olan 32 hücreye uzun cümle yazılmıştı; bu hem referansı kırıyor hem de sabit boyutlu başlık alanını zorluyordu. Ayrıca özgün azami başlık uzunluğunu aşan tek metin kısaltıldı; artık hiçbir başlık oyunun kendi sınırını aşmıyor."
 }
