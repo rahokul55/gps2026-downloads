@@ -131,18 +131,25 @@ jobs:
               veri = dosya.read_bytes()
               ozet = hashlib.sha256(veri).hexdigest()
               if ad in mevcut:
-                  if mevcut[ad]["size"] == len(veri):
-                      print(f"{ad} zaten yüklü, atlandı.")
+                  # Boyut ayni olup icerik farkli olabiliyor (ses paketi her
+                  # uretimde farkli sifreleniyordu). Karsilastirma ozetle yapilir.
+                  uzak_ozet = (mevcut[ad].get("digest") or "").replace("sha256:", "")
+                  if uzak_ozet == ozet:
+                      print(f"{ad} zaten guncel, atlandi.")
+                      yuklendi[ad] = (mevcut[ad], ozet)
+                      continue
+                  if not uzak_ozet and mevcut[ad]["size"] == len(veri):
+                      print(f"{ad} ayni boyutta, ozet yok - atlandi.")
                       yuklendi[ad] = (mevcut[ad], ozet)
                       continue
                   if ad == DUBLAJ:
                       api(f"https://api.github.com/repos/{depo}/releases/assets/"
                           f"{mevcut[ad]['id']}", yontem="DELETE")
-                      print(f"{ad} eski sürümü silindi.")
+                      print(f"{ad} eski surumu silindi.")
                   else:
                       raise SystemExit(
-                          f"{etiket} içinde farklı boyutta {ad} var. "
-                          "Yeni sürüm numarası kullanın."
+                          f"{etiket} icinde farkli bir {ad} var. "
+                          "Yeni surum numarasi kullanin."
                       )
               url = hedef_yayin["upload_url"].split("{")[0] + f"?name={ad}"
               with urllib.request.urlopen(
