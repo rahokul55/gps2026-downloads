@@ -1,15 +1,20 @@
 {
-  "surum": "2.7",
-  "tarih": "2026-07-30",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.7/gps2026turkceyama.exe",
-  "sha256": "7fe79a9fb9c432c004078b89a66d04981cca0f2576801056e29db9fc3103f05f",
-  "boyut": 120900120,
-  "notlar": "Kayıt alma hatası giderildi: kayıt slotları artık dolu geliyor. Şirket ve kurum panellerine girerken oluşan donma çözüldü. Ülke liderleri ve şirket yöneticileri gerçek adlarıyla geliyor. Türkçe dublaj baştan seslendirildi. Kurulum dosyası dijital imza aldı ve otomatik güncelleme başlatıcısı eklendi.",
+  "surum": "2.8",
+  "tarih": "2026-07-31",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.8/gps2026turkceyama.exe",
+  "sha256": "90330b1a062ff7df86114ff854ce875fc9297bf788d063ea11d9e06ccd18b655",
+  "boyut": 121276768,
+  "notlar": "Türkçe dublaj tamamlandı: 4529 diyalog dosyası oyunun kendi seslendirme sanatçılarının tınısıyla Türkçe seslendirildi. Çeviride kalmış İngilizce ifadeler temizlendi (390 hücre): \"Anlaşma signed\", \"Bölge affected\", \"Yasa tasarısı introduced on\" gibi yarım çeviriler ve \"Bayan\" olarak yazılan milyon/milyar kısaltmaları düzeltildi. Ses paketi artık ayrı indiriliyor; dublaj istemeyen 115 MB'lık kurulum dosyasını indirip bitiriyor, isteyenlere kurulum sırasında ses paketi ekleniyor. Aynı ses paketi kuruluysa güncellemede yeniden indirilmiyor.",
   "site": "https://43software.com.tr",
+  "dublaj": {
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.8/gps2026dublaj.dat",
+    "sha256": "04d5b8115e3dd2e6d30b23699de31000d38f401de799eec48cdbf0b16d58f499",
+    "boyut": 500244502
+  },
   "baslatici": {
-    "surum": "2.7",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.7/GPS2026Baslat.exe",
-    "sha256": "56619709d3020fa5d0c6a88d84b14ceac94c74b5d2e481431de278d230df2198",
-    "boyut": 12418160
+    "surum": "2.8",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v2.8/GPS2026Baslat.exe",
+    "sha256": "fe8a798e4d9fea3a42fd2ce3915c716c16c3ed43f2a5d4010beef86c947a97a5",
+    "boyut": 12418904
   }
 }
