@@ -1,4 +1,4 @@
 {
-  "surum": "3.3",
-  "notlar": "Şirket panellerindeki donma ve çökmenin kaynağı bulundu: oyunun şirket adı alanı sabit 28 karakter, gerçek şirket adlarıyla değiştirince 593 tanesi bu sınırı aşıyordu (en uzunu 65 karakter). Oyunun kendi hata günlüğünde tam da şirket sözleşmesi nesnesi çözülemiyordu. Adlar şirket türü ekleri atılarak sınıra sığdırıldı; \"China State Construction Engineering Corporation Limited\" artık \"China State Construction\" olarak görünüyor. Tüm tablolarda aynı denetim yapıldı: alan genişliğini aşan hücre sayısı 10.842'den 162'ye indi ve kalanlar uzun metin alanlarında küçük sapmalar."
+  "surum": "3.4",
+  "notlar": "Haber başlıklarında kaybolmuş metinler geri geldi: 120 hücrede cümlenin tamamı silinmiş, ekranda yalnızca değişken adları kalmıştı (\"#OLDT #PALA_TH\" gibi). 58 farklı haber kalıbı yeniden çevrildi; artık \"Öfkeli göstericiler saraya yürüyor\", \"Devlet Başkanı hakkındaki dava sonuçlandı\" gibi düzgün başlıklar görünüyor. Ayrıca satır kayması, değişken kaybı ve ayraç bozulması için tüm tablolar tarandı — üçü de sıfır çıktı."
 }
