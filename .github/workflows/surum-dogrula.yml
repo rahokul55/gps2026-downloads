@@ -18,9 +18,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: surum.json alanlarını ve indirme bağlantısını denetle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python - <<'PY'
-          import json, sys, urllib.request
+          import json, os, sys, urllib.error, urllib.request
 
           veri = json.load(open("surum.json", encoding="utf-8"))
           hata = []
@@ -64,6 +66,57 @@ jobs:
                       f"{etiket}: boyut uyuşmuyor (bildirilen {boyut}, gerçek {gercek})"
                   )
               print(f"{etiket}: HTTP {durum}, boyut {gercek}")
+
+          # --- ozet dogrulamasi -------------------------------------------
+          # Boyut ayni olup icerik farkli olabiliyor; bu tam olarak daha once
+          # yasanan hata sinifi. Manifestteki sha256 ile Release varliginin
+          # kendi digest'i karsilastirilir (indirme gerekmez).
+          def api(yol):
+              r = urllib.request.Request(f"https://api.github.com{yol}")
+              r.add_header("Accept", "application/vnd.github+json")
+              r.add_header("User-Agent", "gps2026-surum-denetim")
+              jeton = os.environ.get("GITHUB_TOKEN")
+              if jeton:
+                  r.add_header("Authorization", f"Bearer {jeton}")
+              try:
+                  with urllib.request.urlopen(r, timeout=60) as y:
+                      return json.load(y)
+              except urllib.error.HTTPError as e:
+                  print(f"  API {e.code} {yol}")
+                  return None
+
+          depo = os.environ.get("GITHUB_REPOSITORY", "")
+          beklenen = [
+              ("kurulum", f"v{surum}", "gps2026turkceyama.exe",
+               veri.get("sha256")),
+              ("başlatıcı", f"v{surum}", "GPS2026Baslat.exe",
+               (veri.get("baslatici") or {}).get("sha256")),
+              ("dublaj", "dublaj", "gps2026dublaj.dat",
+               (veri.get("dublaj") or {}).get("sha256")),
+          ]
+          for etiket, tag, dosya, bildirilen in beklenen:
+              if not bildirilen:
+                  continue
+              yayin = api(f"/repos/{depo}/releases/tags/{tag}")
+              if yayin is None:
+                  hata.append(f"{etiket}: '{tag}' Release'i bulunamadı.")
+                  continue
+              varlik = next((a for a in yayin.get("assets", [])
+                             if a["name"] == dosya), None)
+              if varlik is None:
+                  hata.append(f"{etiket}: '{tag}' içinde {dosya} yok.")
+                  continue
+              gercek_ozet = (varlik.get("digest") or "").replace("sha256:", "")
+              if not gercek_ozet:
+                  print(f"{etiket}: varlık özeti API'de yok, atlandı.")
+                  continue
+              if gercek_ozet.lower() != str(bildirilen).lower():
+                  hata.append(
+                      f"{etiket}: ÖZET UYUŞMUYOR — manifest {bildirilen[:16]}…, "
+                      f"yayımlanan dosya {gercek_ozet[:16]}…  "
+                      "Bu hâliyle kurulum ve başlatıcı indirmeyi reddeder.")
+              else:
+                  print(f"{etiket}: özet doğrulandı ({gercek_ozet[:16]}…)")
 
           if hata:
               print("\n".join("HATA: " + h for h in hata))
