@@ -1,10 +1,10 @@
 {
-  "surum": "3.3",
+  "surum": "3.4",
   "tarih": "2026-08-01",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.3/gps2026turkceyama.exe",
-  "sha256": "d47b7ef9ba6d60e5733543a707d921dfeb78727a4900514132a8a23ceeda0de5",
-  "boyut": 133291456,
-  "notlar": "Şirket panellerindeki donma ve çökmenin kaynağı bulundu: oyunun şirket adı alanı sabit 28 karakter, gerçek şirket adlarıyla değiştirince 593 tanesi bu sınırı aşıyordu (en uzunu 65 karakter). Oyunun kendi hata günlüğünde tam da şirket sözleşmesi nesnesi çözülemiyordu. Adlar şirket türü ekleri atılarak sınıra sığdırıldı; \"China State Construction Engineering Corporation Limited\" artık \"China State Construction\" olarak görünüyor. Tüm tablolarda aynı denetim yapıldı: alan genişliğini aşan hücre sayısı 10.842'den 162'ye indi ve kalanlar uzun metin alanlarında küçük sapmalar.",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.4/gps2026turkceyama.exe",
+  "sha256": "e6c4b5c4d184cc13e5618fd66e9a5e7cb83dba32d384334af132275589a2f199",
+  "boyut": 133300232,
+  "notlar": "Haber başlıklarında kaybolmuş metinler geri geldi: 120 hücrede cümlenin tamamı silinmiş, ekranda yalnızca değişken adları kalmıştı (\"#OLDT #PALA_TH\" gibi). 58 farklı haber kalıbı yeniden çevrildi; artık \"Öfkeli göstericiler saraya yürüyor\", \"Devlet Başkanı hakkındaki dava sonuçlandı\" gibi düzgün başlıklar görünüyor. Ayrıca satır kayması, değişken kaybı ve ayraç bozulması için tüm tablolar tarandı — üçü de sıfır çıktı.",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "3.3",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.3/GPS2026Baslat.exe",
-    "sha256": "bb492932f1036ee6ea19730f36066040896efff9f822c11cf2dd3ab8b8feb60a",
-    "boyut": 12422080
+    "surum": "3.4",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.4/GPS2026Baslat.exe",
+    "sha256": "5add8a65f22b5c6b6f862f4a41fbc37fa8d725f6fc685442d0f2c82896837bf4",
+    "boyut": 12421600
   }
 }
