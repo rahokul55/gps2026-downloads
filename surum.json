@@ -1,10 +1,10 @@
 {
-  "surum": "3.4",
+  "surum": "3.5",
   "tarih": "2026-08-01",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.4/gps2026turkceyama.exe",
-  "sha256": "e6c4b5c4d184cc13e5618fd66e9a5e7cb83dba32d384334af132275589a2f199",
-  "boyut": 133300232,
-  "notlar": "Haber başlıklarında kaybolmuş metinler geri geldi: 120 hücrede cümlenin tamamı silinmiş, ekranda yalnızca değişken adları kalmıştı (\"#OLDT #PALA_TH\" gibi). 58 farklı haber kalıbı yeniden çevrildi; artık \"Öfkeli göstericiler saraya yürüyor\", \"Devlet Başkanı hakkındaki dava sonuçlandı\" gibi düzgün başlıklar görünüyor. Ayrıca satır kayması, değişken kaybı ve ayraç bozulması için tüm tablolar tarandı — üçü de sıfır çıktı.",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.5/gps2026turkceyama.exe",
+  "sha256": "636c50491c1e0a73c447fbff07f8441f372657a5da7d1f7811fefd13559f307d",
+  "boyut": 133487432,
+  "notlar": "Baştan sona hata denetimi yapıldı; oynanışı ve metinleri bozan sekiz ayrı kusur giderildi. • dat_10 klasöründe Türkçeleşmemiş 7.553 hücre tamamlandı — bir senaryoda İngilizce kalan menü, haber ve ülke metinleri artık Türkçe. • Motorun çizemediği tipografik karakterler (eğik tırnak, uzun tire, €, ‰) 998 hücrede temizlendi; alıntı ekranında kaybolan tırnaklar geri geldi. • Cümle içinde İngilizce kalan 1.572 zamir/sıfat değişkeni Türkçeleştirildi (\"his\", \"he\", \"him\" yerine \"onun\", \"o\", \"onu\"). • 70 haber ve durum cümlesi yeniden yazıldı; İngilizce yüklem etiketi cümlenin ortasında görünmüyor. • M",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "3.4",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.4/GPS2026Baslat.exe",
-    "sha256": "5add8a65f22b5c6b6f862f4a41fbc37fa8d725f6fc685442d0f2c82896837bf4",
-    "boyut": 12421600
+    "surum": "3.5",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.5/GPS2026Baslat.exe",
+    "sha256": "8a3f28543c7deb8061a1dacaa74d074f17f6793d9e1d014a85980bdfbe59f937",
+    "boyut": 12421824
   }
 }
