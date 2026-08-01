@@ -1,10 +1,10 @@
 {
-  "surum": "4.0",
+  "surum": "4.1",
   "tarih": "2026-08-01",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v4.0/gps2026turkceyama.exe",
-  "sha256": "acee9f9db04f7dfb55b0ad964e2defdfa13b55a55e95d053d2e75058a7335a97",
-  "boyut": 133541304,
-  "notlar": "Aynı ada düşmüş şirket ve kişi kayıtları ayrıştırıldı. Sahte şirket adları gerçek adlarla değiştirilirken iki ayrı şirket aynı ada düşmüştü: \"China SC Partners\" ile \"China SCE\" listede ikisi de \"China State Construction\" görünüyordu. Aynı şey 42 şirket ve 6 kişi için geçerliydi; oyuncu listede aynı adı iki kez görüyor, hangi kaydın hangisi olduğunu ayırt edemiyordu. Her çakışmada adı en çok hak eden kayıt tutuldu, diğerleri oyunun özgün adına döndü. Hak etme ölçüsü karakter benzerliği: \"Motsibosho Eluctroc\" Mitsubishi Electric adını aldı, \"ME Enterprises\" özgün adında kaldı; \"MHI\" Mitsubishi H",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v4.1/gps2026turkceyama.exe",
+  "sha256": "075ff17e3cc3eaccb847c9e1068cf602d242e2d26e0a0df53e1351e7b4dd7832",
+  "boyut": 133538080,
+  "notlar": "Metin hataları ve dublaj kurulumu düzeltildi. **Türkçe dublaj artık kurulabiliyor.** v4.0'da kurulum programının içine ses paketinin yanlış doğrulama özeti gömülmüştü; dublaj seçen kullanıcıda paket indiriliyor ama doğrulama düşüyor ve ses kurulmuyordu. Özet artık yayındaki dosyadan okunuyor. Dublajı zaten kurmuş olanlar 477 MB'ı yeniden indirmez. **Rus isimleri artık doğru çekiliyor.** Oyunun Rusça ad çekim tablosu yanlışlıkla çeviriden geçmişti: bunlar cümle değil ek, ama makine çevirisi sözcük sanıp \"и\" ekini \"ve\", \"а\" ekini \"bir\" yapmış, bir kısmını da boşaltmıştı. Motor Rus kişi ve yer ad",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "4.0",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v4.0/GPS2026Baslat.exe",
-    "sha256": "606a09980bf45fc538cc2b6bb58bda8c5e4bcbff4f76612fddd92d453da30f9d",
-    "boyut": 12422352
+    "surum": "4.1",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v4.1/GPS2026Baslat.exe",
+    "sha256": "504cf792b444def4a6fd7ad75dbc74584d8f661c789a936332e3e3799f8ca86f",
+    "boyut": 12422928
   }
 }
