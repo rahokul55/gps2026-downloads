@@ -1,10 +1,10 @@
 {
-  "surum": "3.9",
+  "surum": "4.0",
   "tarih": "2026-08-01",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.9/gps2026turkceyama.exe",
-  "sha256": "6987d29c44dc8e40d5b6809d0ae37067e47e257f83a2064a1ce3c6a77d613863",
-  "boyut": 133541120,
-  "notlar": "Bu sürüm kurulum programının kendisini sağlamlaştırır; oyun metinlerinde değişiklik yok. • **Yarım kalan kurulum artık geri alınıyor.** Kopyalama sırasında bir hata olursa (izin, disk dolması, virüs programı) oyun yamalı ve yamasız dosyaların karışımı hâlinde kalıyordu; tablolar birbirini tutmadığı için oyun çökebilirdi. Artık yazılan her dosya yedekten geri konuyor, yamanın eklediği dosyalar siliniyor ve ekranda ne olduğu yazıyor. • Kurulumdan önce boş disk alanı denetleniyor; yer yoksa dosyalara hiç dokunulmadan anlaşılır bir uyarı veriliyor. • Kurulum kendi geçici klasörünü açıyor. Sabit ad",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v4.0/gps2026turkceyama.exe",
+  "sha256": "acee9f9db04f7dfb55b0ad964e2defdfa13b55a55e95d053d2e75058a7335a97",
+  "boyut": 133541304,
+  "notlar": "Aynı ada düşmüş şirket ve kişi kayıtları ayrıştırıldı. Sahte şirket adları gerçek adlarla değiştirilirken iki ayrı şirket aynı ada düşmüştü: \"China SC Partners\" ile \"China SCE\" listede ikisi de \"China State Construction\" görünüyordu. Aynı şey 42 şirket ve 6 kişi için geçerliydi; oyuncu listede aynı adı iki kez görüyor, hangi kaydın hangisi olduğunu ayırt edemiyordu. Her çakışmada adı en çok hak eden kayıt tutuldu, diğerleri oyunun özgün adına döndü. Hak etme ölçüsü karakter benzerliği: \"Motsibosho Eluctroc\" Mitsubishi Electric adını aldı, \"ME Enterprises\" özgün adında kaldı; \"MHI\" Mitsubishi H",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "3.9",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.9/GPS2026Baslat.exe",
-    "sha256": "1effbb8a48da237873eb5c96f53d5fe539273ce87a4a5b677ce3953b14e7ca2c",
-    "boyut": 12422224
+    "surum": "4.0",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v4.0/GPS2026Baslat.exe",
+    "sha256": "606a09980bf45fc538cc2b6bb58bda8c5e4bcbff4f76612fddd92d453da30f9d",
+    "boyut": 12422352
   }
 }
