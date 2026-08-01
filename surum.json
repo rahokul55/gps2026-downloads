@@ -1,10 +1,10 @@
 {
-  "surum": "3.7",
+  "surum": "3.8",
   "tarih": "2026-08-01",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.7/gps2026turkceyama.exe",
-  "sha256": "2f815c87b693f1315ca16f2d6a0da44a497cfed1fe95b57e5050d1890732f28f",
-  "boyut": 133539480,
-  "notlar": "Önemli: 3.6'da harita etiketleri bozulmuştu, bu sürüm onu düzeltir. 3.6'yı kuranların güncellemesi önerilir. Oyunun 3B haritası menülerden farklı bir yazı tipi kullanıyor ve o atlas Türkçe harfleri çizemiyor; bu yüzden ülke, şehir ve coğrafi yer adları haritada bilerek ASCII yazılıyor. 3.6'daki yazım onarımı bu kararı farkında olmadan bozmuş, 408 yer adına Türkçe harf geri gelmişti. Geri alındı; harita etiketleri yeniden okunaklı. Kurulumdaki \"menü\" seçeneğinin ana kopyası bir haftadır güncellenmiyordu: o seçeneği işaretleyen oyuncu ülke ve yer adı tablolarında eski metni alıyordu. Ana kopya 3",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.8/gps2026turkceyama.exe",
+  "sha256": "31189e183cbea21e6bcca798147031ce4ea2c157abd87f864d40a7235cadd31f",
+  "boyut": 133539120,
+  "notlar": "Başlatıcı ve kurulum tarafındaki üç hata giderildi. • Başlatıcı kendini hiç güncelleyemiyordu. Güncellemeyi başlatıcının kendisi çalıştırdığı için Windows dosyanın üzerine yazdırmıyor, kurulum da sessizce vazgeçiyordu; oyuncuda ilk kurduğu başlatıcı kalıyordu. Artık yeni sürüm yanına bırakılıyor ve başlatıcı bir sonraki açılışta kendini onunla değiştirip yeniden başlıyor. • Kullanıcı adında kesme işareti varsa (C:\\Users\\O'Brien gibi) masaüstü kısayolu hiç oluşmuyordu; kısayolu kuran betik tırnak yüzünden hata veriyordu. Kaçış eklendi. • Her güncellemeden sonra 127 MB'lık kurulum dosyası geçici",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "3.7",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.7/GPS2026Baslat.exe",
-    "sha256": "ed91f9e3a40df98730b71e161564c0d6f53d3cfcbee755fda00dcb64b00e02cc",
-    "boyut": 12422248
+    "surum": "3.8",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.8/GPS2026Baslat.exe",
+    "sha256": "66bbc32b0b8fd808022e9efe8bae9459f2062489aecbaaec06a13272d1ad5c0e",
+    "boyut": 12423224
   }
 }
