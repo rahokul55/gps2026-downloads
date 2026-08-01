@@ -1,10 +1,10 @@
 {
-  "surum": "3.8",
+  "surum": "3.9",
   "tarih": "2026-08-01",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.8/gps2026turkceyama.exe",
-  "sha256": "31189e183cbea21e6bcca798147031ce4ea2c157abd87f864d40a7235cadd31f",
-  "boyut": 133539120,
-  "notlar": "Başlatıcı ve kurulum tarafındaki üç hata giderildi. • Başlatıcı kendini hiç güncelleyemiyordu. Güncellemeyi başlatıcının kendisi çalıştırdığı için Windows dosyanın üzerine yazdırmıyor, kurulum da sessizce vazgeçiyordu; oyuncuda ilk kurduğu başlatıcı kalıyordu. Artık yeni sürüm yanına bırakılıyor ve başlatıcı bir sonraki açılışta kendini onunla değiştirip yeniden başlıyor. • Kullanıcı adında kesme işareti varsa (C:\\Users\\O'Brien gibi) masaüstü kısayolu hiç oluşmuyordu; kısayolu kuran betik tırnak yüzünden hata veriyordu. Kaçış eklendi. • Her güncellemeden sonra 127 MB'lık kurulum dosyası geçici",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.9/gps2026turkceyama.exe",
+  "sha256": "6987d29c44dc8e40d5b6809d0ae37067e47e257f83a2064a1ce3c6a77d613863",
+  "boyut": 133541120,
+  "notlar": "Bu sürüm kurulum programının kendisini sağlamlaştırır; oyun metinlerinde değişiklik yok. • **Yarım kalan kurulum artık geri alınıyor.** Kopyalama sırasında bir hata olursa (izin, disk dolması, virüs programı) oyun yamalı ve yamasız dosyaların karışımı hâlinde kalıyordu; tablolar birbirini tutmadığı için oyun çökebilirdi. Artık yazılan her dosya yedekten geri konuyor, yamanın eklediği dosyalar siliniyor ve ekranda ne olduğu yazıyor. • Kurulumdan önce boş disk alanı denetleniyor; yer yoksa dosyalara hiç dokunulmadan anlaşılır bir uyarı veriliyor. • Kurulum kendi geçici klasörünü açıyor. Sabit ad",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "3.8",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.8/GPS2026Baslat.exe",
-    "sha256": "66bbc32b0b8fd808022e9efe8bae9459f2062489aecbaaec06a13272d1ad5c0e",
-    "boyut": 12423224
+    "surum": "3.9",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.9/GPS2026Baslat.exe",
+    "sha256": "1effbb8a48da237873eb5c96f53d5fe539273ce87a4a5b677ce3953b14e7ca2c",
+    "boyut": 12422224
   }
 }
