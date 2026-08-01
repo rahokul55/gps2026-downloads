@@ -52,14 +52,21 @@ jobs:
                       return None
                   raise SystemExit(f"GitHub API {e.code}: {e.read()[:300]!r}")
 
-          surumler = api(f"/repos/{depo}/releases?per_page=50") or []
+          surumler = api(f"/repos/{depo}/releases?per_page=100") or []
 
-          # 1) ses paketi yayini on-yayin olsun, asla "latest" gorunmesin
-          for r in surumler:
-              if r["tag_name"] == DUBLAJ_ETIKET and not r["prerelease"]:
-                  api(f"/repos/{depo}/releases/{r['id']}",
-                      {"prerelease": True, "make_latest": "false"}, "PATCH")
-                  print(f"{DUBLAJ_ETIKET} on-yayin olarak isaretlendi.")
+          # 1) ses paketi yayini on-yayin olsun, asla "latest" gorunmesin.
+          #    Listeyi taramak yerine etiketle DOGRUDAN cekilir: ses paketi
+          #    eski bir yayin oldugu icin surum sayisi arttikca listenin ilk
+          #    sayfasindan dusup denetim disi kalabilirdi.
+          ses = api(f"/repos/{depo}/releases/tags/{DUBLAJ_ETIKET}")
+          if ses is None:
+              print(f"{DUBLAJ_ETIKET} yayini yok, atlandi.")
+          elif ses["prerelease"]:
+              print(f"{DUBLAJ_ETIKET} zaten on-yayin.")
+          else:
+              api(f"/repos/{depo}/releases/{ses['id']}",
+                  {"prerelease": True, "make_latest": "false"}, "PATCH")
+              print(f"{DUBLAJ_ETIKET} on-yayin olarak isaretlendi.")
 
           # 2) en yuksek vX.Y surumu "latest" olsun
           def sirala(r):
@@ -67,11 +74,15 @@ jobs:
 
           adaylar = [r for r in surumler
                      if re.fullmatch(r"v\d+(\.\d+)*", r["tag_name"]) and not r["draft"]]
-          if adaylar:
-              son = max(adaylar, key=sirala)
-              api(f"/repos/{depo}/releases/{son['id']}",
-                  {"prerelease": False, "make_latest": "true"}, "PATCH")
-              print(f"{son['tag_name']} en son sürüm olarak işaretlendi.")
-          else:
+          if not adaylar:
               print("vX.Y biçiminde sürüm bulunamadı.")
+          else:
+              son = max(adaylar, key=sirala)
+              simdiki = api(f"/repos/{depo}/releases/latest") or {}
+              if son["prerelease"] or simdiki.get("id") != son["id"]:
+                  api(f"/repos/{depo}/releases/{son['id']}",
+                      {"prerelease": False, "make_latest": "true"}, "PATCH")
+                  print(f"{son['tag_name']} en son sürüm olarak işaretlendi.")
+              else:
+                  print(f"{son['tag_name']} zaten en son sürüm, dokunulmadi.")
           PY
