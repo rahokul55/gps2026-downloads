@@ -1,10 +1,10 @@
 {
-  "surum": "3.2",
-  "tarih": "2026-07-31",
-  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.2/gps2026turkceyama.exe",
-  "sha256": "411e623c8024606a733bdb0c300149a205b22df38f29e01014001a316c9c1764",
-  "boyut": 133406008,
-  "notlar": "Oyunun ürettiği karakterlerin soyadlarında iki hata düzeltildi: soyad havuzundaki \"Day\" ve \"White\" gerçek soyad olduğu hâlde sözlük kelimesi sanılıp \"Gün\" ve \"beyaz\" diye çevrilmişti; artık özgün hâlinde. Havuzdaki Türkçe soyadların yazımına ve motorun gerektirdiği harf karşılıklarına dokunulmadı.",
+  "surum": "3.3",
+  "tarih": "2026-08-01",
+  "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.3/gps2026turkceyama.exe",
+  "sha256": "d47b7ef9ba6d60e5733543a707d921dfeb78727a4900514132a8a23ceeda0de5",
+  "boyut": 133291456,
+  "notlar": "Şirket panellerindeki donma ve çökmenin kaynağı bulundu: oyunun şirket adı alanı sabit 28 karakter, gerçek şirket adlarıyla değiştirince 593 tanesi bu sınırı aşıyordu (en uzunu 65 karakter). Oyunun kendi hata günlüğünde tam da şirket sözleşmesi nesnesi çözülemiyordu. Adlar şirket türü ekleri atılarak sınıra sığdırıldı; \"China State Construction Engineering Corporation Limited\" artık \"China State Construction\" olarak görünüyor. Tüm tablolarda aynı denetim yapıldı: alan genişliğini aşan hücre sayısı 10.842'den 162'ye indi ve kalanlar uzun metin alanlarında küçük sapmalar.",
   "site": "https://43software.com.tr",
   "dublaj": {
     "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/dublaj/gps2026dublaj.dat",
@@ -12,9 +12,9 @@
     "boyut": 500244502
   },
   "baslatici": {
-    "surum": "3.2",
-    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.2/GPS2026Baslat.exe",
-    "sha256": "347f07af027bb7b1893064620830235821e35975088c8151a997b4007d747b28",
-    "boyut": 12421000
+    "surum": "3.3",
+    "indirme": "https://github.com/rahokul55/gps2026-downloads/releases/download/v3.3/GPS2026Baslat.exe",
+    "sha256": "bb492932f1036ee6ea19730f36066040896efff9f822c11cf2dd3ab8b8feb60a",
+    "boyut": 12422080
   }
 }
