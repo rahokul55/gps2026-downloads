@@ -1,4 +1,4 @@
 {
-  "surum": "3.2",
-  "notlar": "Oyunun ürettiği karakterlerin soyadlarında iki hata düzeltildi: soyad havuzundaki \"Day\" ve \"White\" gerçek soyad olduğu hâlde sözlük kelimesi sanılıp \"Gün\" ve \"beyaz\" diye çevrilmişti; artık özgün hâlinde. Havuzdaki Türkçe soyadların yazımına ve motorun gerektirdiği harf karşılıklarına dokunulmadı."
+  "surum": "3.3",
+  "notlar": "Şirket panellerindeki donma ve çökmenin kaynağı bulundu: oyunun şirket adı alanı sabit 28 karakter, gerçek şirket adlarıyla değiştirince 593 tanesi bu sınırı aşıyordu (en uzunu 65 karakter). Oyunun kendi hata günlüğünde tam da şirket sözleşmesi nesnesi çözülemiyordu. Adlar şirket türü ekleri atılarak sınıra sığdırıldı; \"China State Construction Engineering Corporation Limited\" artık \"China State Construction\" olarak görünüyor. Tüm tablolarda aynı denetim yapıldı: alan genişliğini aşan hücre sayısı 10.842'den 162'ye indi ve kalanlar uzun metin alanlarında küçük sapmalar."
 }
